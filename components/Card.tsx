@@ -1,17 +1,33 @@
 import { Parcel, Vehicle } from "@/types";
 import { Ionicons } from "@expo/vector-icons";
-import { StyleSheet, Text, View } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 
 type Props = {
   parcel?: Parcel;
   vehicle?: Vehicle;
+  expanded: boolean;
+  onPress: () => void;
 };
 
-export default function Card({ parcel, vehicle }: Props) {
+export default function Card({
+  parcel,
+  vehicle,
+  expanded,
+  onPress,
+}: Props) {
   const isParcel = !!parcel;
 
   return (
-    <View style={styles.card}>
+    <TouchableOpacity
+      style={styles.card}
+      activeOpacity={0.9}
+      onPress={onPress}
+    >
       <View style={styles.icon}>
         <Ionicons
           name={isParcel ? "cube-outline" : "car-outline"}
@@ -30,10 +46,62 @@ export default function Card({ parcel, vehicle }: Props) {
         </Text>
 
         <Text style={styles.info}>
-          {isParcel
-            ? `${parcel!.weight} • ${parcel!.shippingDate}`
-            : vehicle!.driver}
+          {isParcel ? "Colis expédié" : "Véhicule"}
         </Text>
+
+        {expanded && (
+          <View style={styles.details}>
+            {isParcel ? (
+              <>
+                <View style={styles.detailRow}>
+                  <Ionicons
+                    name="barbell-outline"
+                    size={16}
+                    color="#3465ff"
+                  />
+                  <Text style={styles.detailText}>
+                    Poids : {parcel!.weight}
+                  </Text>
+                </View>
+
+                <View style={styles.detailRow}>
+                  <Ionicons
+                    name="calendar-outline"
+                    size={16}
+                    color="#3465ff"
+                  />
+                  <Text style={styles.detailText}>
+                    Date : {parcel!.shippingDate}
+                  </Text>
+                </View>
+              </>
+            ) : (
+              <>
+                <View style={styles.detailRow}>
+                  <Ionicons
+                    name="person-outline"
+                    size={16}
+                    color="#3465ff"
+                  />
+                  <Text style={styles.detailText}>
+                    Chauffeur : {vehicle!.driver}
+                  </Text>
+                </View>
+
+                <View style={styles.detailRow}>
+                  <Ionicons
+                    name="speedometer-outline"
+                    size={16}
+                    color="#3465ff"
+                  />
+                  <Text style={styles.detailText}>
+                    Kilométrage : {vehicle!.mileage}
+                  </Text>
+                </View>
+              </>
+            )}
+          </View>
+        )}
       </View>
 
       <View>
@@ -66,7 +134,7 @@ export default function Card({ parcel, vehicle }: Props) {
           </Text>
         </View>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 }
 
@@ -78,7 +146,7 @@ const styles = StyleSheet.create({
     padding: 12,
     borderRadius: 15,
     flexDirection: "row",
-    alignItems: "center",
+    alignItems: "flex-start",
     elevation: 2,
   },
 
@@ -109,15 +177,28 @@ const styles = StyleSheet.create({
     color: "#999",
   },
 
+  details: {
+    marginTop: 10,
+    paddingTop: 10,
+    borderTopWidth: 1,
+    borderTopColor: "#E5E7EB",
+  },
+
+  detailRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginBottom: 8,
+  },
+
+  detailText: {
+    fontSize: 13,
+    color: "#475569",
+    marginLeft: 8,
+  },
+
   badge: {
     paddingHorizontal: 10,
     paddingVertical: 6,
     borderRadius: 8,
-  },
-
-  arrow: {
-    textAlign: "center",
-    color: "#777",
-    marginTop: 5,
   },
 });

@@ -13,6 +13,8 @@ import FilterButtons from "@/components/FilterButtons";
 export default function Index() {
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState("Tous");
+  const [expandedParcel, setExpandedParcel] = useState<number | null>(null);
+const [expandedVehicle, setExpandedVehicle] = useState<number | null>(null);
 
 const filteredParcels = parcels.filter((parcel) => {
   const text = search.toLowerCase();
@@ -59,6 +61,12 @@ return (
         <Card
           parcel={parcel}
           key={parcel.id}
+            expanded={expandedParcel === parcel.id}
+  onPress={() =>
+    setExpandedParcel(
+      expandedParcel === parcel.id ? null : parcel.id
+    )
+  }
         />
       ))}
 
@@ -68,6 +76,12 @@ return (
   <Card
     key={vehicle.id}
     vehicle={vehicle}
+      expanded={expandedVehicle === vehicle.id}
+  onPress={() =>
+    setExpandedVehicle(
+      expandedVehicle === vehicle.id ? null : vehicle.id
+    )
+  }
   />
 ))}
 
