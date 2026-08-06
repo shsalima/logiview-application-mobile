@@ -1,6 +1,5 @@
 import { Parcel, Vehicle } from "../types";
 
-
 export const parcels: Parcel[] = [
   {
     id: 1,
@@ -18,8 +17,39 @@ export const parcels: Parcel[] = [
     weight: "2 kg",
     shippingDate: "05/08/2026",
   },
+  {
+    id: 3,
+    reference: "COL-003",
+    destination: "Marrakech",
+    status: "En transit",
+    weight: "8 kg",
+    shippingDate: "07/08/2026",
+  },
+  {
+    id: 4,
+    reference: "COL-004",
+    destination: "Fès",
+    status: "Livré",
+    weight: "3 kg",
+    shippingDate: "04/08/2026",
+  },
+  {
+    id: 5,
+    reference: "COL-005",
+    destination: "Agadir",
+    status: "En transit",
+    weight: "12 kg",
+    shippingDate: "08/08/2026",
+  },
+  {
+    id: 6,
+    reference: "COL-006",
+    destination: "Tanger",
+    status: "Livré",
+    weight: "7 kg",
+    shippingDate: "03/08/2026",
+  },
 ];
-
 
 export const vehicles: Vehicle[] = [
   {
@@ -37,5 +67,37 @@ export const vehicles: Vehicle[] = [
     status: "Disponible",
     driver: "Youssef",
     mileage: "80000 km",
+  },
+  {
+    id: 3,
+    registration: "45231-C-6",
+    type: "Camionnette",
+    status: "Disponible",
+    driver: "Khalid",
+    mileage: "54000 km",
+  },
+  {
+    id: 4,
+    registration: "78564-D-6",
+    type: "Poids Lourd",
+    status: "En mission",
+    driver: "Omar",
+    mileage: "165000 km",
+  },
+  {
+    id: 5,
+    registration: "96325-E-6",
+    type: "Fourgon",
+    status: "Disponible",
+    driver: "Hamza",
+    mileage: "92000 km",
+  },
+  {
+    id: 6,
+    registration: "14785-F-6",
+    type: "Camion Frigorifique",
+    status: "En mission",
+    driver: "Karim",
+    mileage: "140500 km",
   },
 ];

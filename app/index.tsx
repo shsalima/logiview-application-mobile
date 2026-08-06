@@ -5,6 +5,7 @@ import Card from "../components/Card";
 import Header from "../components/Header";
 import SearchBar from "../components/SearchBar";
 import SectionTitle from "../components/SectionTitle";
+import BottomNavigation from "../components/BottomNavigation";
 
 import { parcels,vehicles  } from "../data/data";
 import FilterButtons from "@/components/FilterButtons";
@@ -25,32 +26,46 @@ const filteredParcels = parcels.filter((parcel) => {
   return matchSearch && matchStatus;
 });
 
-  return (
+return (
+  <>
     <ScrollView style={styles.container}>
       <Header />
 
-      <SearchBar value={search} onChangeText={setSearch} />
+      <SearchBar
+        value={search}
+        onChangeText={setSearch}
+      />
+
       <FilterButtons
-  selected={statusFilter}
-  onSelect={setStatusFilter}
-  parcels={parcels}
-/>
+        selected={statusFilter}
+        onSelect={setStatusFilter}
+        parcels={parcels}
+      />
 
       <SectionTitle title="Colis" />
 
       {filteredParcels.map((parcel) => (
-        <Card parcel={parcel} key={parcel.id} />
+        <Card
+          parcel={parcel}
+          key={parcel.id}
+        />
       ))}
 
       <SectionTitle title="Véhicules" />
+
       {vehicles.map((vehicle) => (
-  <Card
-    key={vehicle.id}
-    vehicle={vehicle}
-  />
-))}
+        <Card
+          vehicle={vehicle}
+          key={vehicle.id}
+        />
+      ))}
+
     </ScrollView>
-  );
+
+    <BottomNavigation />
+
+  </>
+);
 }
 
 const styles = StyleSheet.create({
