@@ -1,7 +1,6 @@
-import { View, Text, StyleSheet } from "react-native";
+import { View, StyleSheet } from "react-native";
 
-export default function Card({children}:any){
-
+export default function Card({ children }: any) {
   return (
     <View style={styles.card}>
       {children}
@@ -9,18 +8,12 @@ export default function Card({children}:any){
   );
 }
 
-
 const styles = StyleSheet.create({
-
-card:{
- backgroundColor:"#fff",
- padding:15,
- borderRadius:12,
- marginVertical:8,
- shadowColor:"#000",
- shadowOpacity:0.1,
- shadowRadius:5,
- elevation:3
-}
-
+  card: {
+    backgroundColor: "#fff",
+    padding: 15,
+    borderRadius: 12,
+    marginVertical: 8,
+    elevation: 3,
+  },
 });
