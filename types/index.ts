@@ -7,3 +7,12 @@ export interface Parcel {
     shippingDate: string;
 
 }
+
+export interface Vehicle {
+  id: number;
+  registration: string;
+  type: string;
+  status: "Disponible" | "En mission";
+  driver: string;
+  mileage: string;
+}
