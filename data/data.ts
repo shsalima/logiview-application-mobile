@@ -1,32 +1,41 @@
-export const parcels = [
+import { Parcel, Vehicle } from "../types";
+
+
+export const parcels: Parcel[] = [
   {
     id: 1,
-    name: "Colis #001",
-    status: "En livraison",
+    reference: "COL-001",
     destination: "Casablanca",
-    date: "06/08/2026",
+    status: "En transit",
+    weight: "5 kg",
+    shippingDate: "06/08/2026",
   },
   {
     id: 2,
-    name: "Colis #002",
-    status: "Livré",
+    reference: "COL-002",
     destination: "Rabat",
-    date: "05/08/2026",
+    status: "Livré",
+    weight: "2 kg",
+    shippingDate: "05/08/2026",
   },
 ];
 
 
-export const vehicles = [
+export const vehicles: Vehicle[] = [
   {
-    id:1,
-    name:"Camion 01",
-    driver:"Ahmed",
-    status:"Disponible"
+    id: 1,
+    registration: "12345-A-6",
+    type: "Camion",
+    status: "En mission",
+    driver: "Ahmed",
+    mileage: "120000 km",
   },
   {
-    id:2,
-    name:"Camion 02",
-    driver:"Youssef",
-    status:"En route"
-  }
+    id: 2,
+    registration: "67890-B-6",
+    type: "Van",
+    status: "Disponible",
+    driver: "Youssef",
+    mileage: "80000 km",
+  },
 ];
