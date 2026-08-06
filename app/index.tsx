@@ -15,9 +15,11 @@ export default function Index() {
   const [statusFilter, setStatusFilter] = useState("Tous");
 
 const filteredParcels = parcels.filter((parcel) => {
-  const matchSearch = parcel.reference
-    .toLowerCase()
-    .includes(search.toLowerCase());
+  const text = search.toLowerCase();
+
+  const matchSearch =
+    parcel.reference.toLowerCase().includes(text) ||
+    parcel.destination.toLowerCase().includes(text);
 
   const matchStatus =
     statusFilter === "Tous" ||
@@ -25,11 +27,20 @@ const filteredParcels = parcels.filter((parcel) => {
 
   return matchSearch && matchStatus;
 });
+const filteredVehicles = vehicles.filter((vehicle) => {
+  const text = search.toLowerCase();
+
+  return (
+    vehicle.registration.toLowerCase().includes(text) ||
+    vehicle.type.toLowerCase().includes(text)
+  );
+});
 
 return (
   <>
     <ScrollView style={styles.container}>
-      <Header />
+      <Header  parcelsCount={parcels.length}
+  vehiclesCount={vehicles.length} />
 
       <SearchBar
         value={search}
@@ -53,12 +64,12 @@ return (
 
       <SectionTitle title="Véhicules" />
 
-      {vehicles.map((vehicle) => (
-        <Card
-          vehicle={vehicle}
-          key={vehicle.id}
-        />
-      ))}
+    {filteredVehicles.map((vehicle) => (
+  <Card
+    key={vehicle.id}
+    vehicle={vehicle}
+  />
+))}
 
     </ScrollView>
 
