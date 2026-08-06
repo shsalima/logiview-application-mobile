@@ -1,23 +1,38 @@
-import { Parcel } from "@/types";
+import { Parcel, Vehicle } from "@/types";
 import { Ionicons } from "@expo/vector-icons";
 import { StyleSheet, Text, View } from "react-native";
+
 type Props = {
-  parcel: Parcel;
+  parcel?: Parcel;
+  vehicle?: Vehicle;
 };
-export default function Card({ parcel }: Props) {
+
+export default function Card({ parcel, vehicle }: Props) {
+  const isParcel = !!parcel;
+
   return (
     <View style={styles.card}>
       <View style={styles.icon}>
-        <Ionicons name="cube-outline" size={22} color="#3465ff" />
+        <Ionicons
+          name={isParcel ? "cube-outline" : "car-outline"}
+          size={22}
+          color="#3465ff"
+        />
       </View>
 
       <View style={{ flex: 1 }}>
-        <Text style={styles.ref}>#{parcel.reference}</Text>
+        <Text style={styles.ref}>
+          {isParcel ? `#${parcel!.reference}` : vehicle!.registration}
+        </Text>
 
-        <Text style={styles.destination}>{parcel.destination}</Text>
+        <Text style={styles.destination}>
+          {isParcel ? parcel!.destination : vehicle!.type}
+        </Text>
 
         <Text style={styles.info}>
-          {parcel.weight} • {parcel.shippingDate}
+          {isParcel
+            ? `${parcel!.weight} • ${parcel!.shippingDate}`
+            : vehicle!.driver}
         </Text>
       </View>
 
@@ -26,17 +41,28 @@ export default function Card({ parcel }: Props) {
           style={[
             styles.badge,
             {
-              backgroundColor:
-                parcel.status === "Livré" ? "#d8f8e8" : "#fff1c7",
+              backgroundColor: isParcel
+                ? parcel!.status === "Livré"
+                  ? "#d8f8e8"
+                  : "#fff1c7"
+                : vehicle!.status === "Disponible"
+                ? "#d8f8e8"
+                : "#fff1c7",
             },
           ]}
         >
           <Text
             style={{
-              color: parcel.status === "Livré" ? "#16a34a" : "#e88900",
+              color: isParcel
+                ? parcel!.status === "Livré"
+                  ? "#16a34a"
+                  : "#e88900"
+                : vehicle!.status === "Disponible"
+                ? "#16a34a"
+                : "#e88900",
             }}
           >
-            {parcel.status}
+            {isParcel ? parcel!.status : vehicle!.status}
           </Text>
         </View>
       </View>

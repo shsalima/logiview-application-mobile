@@ -6,7 +6,7 @@ import Header from "../components/Header";
 import SearchBar from "../components/SearchBar";
 import SectionTitle from "../components/SectionTitle";
 
-import { parcels } from "../data/data";
+import { parcels,vehicles  } from "../data/data";
 import FilterButtons from "@/components/FilterButtons";
 
 export default function Index() {
@@ -43,6 +43,12 @@ const filteredParcels = parcels.filter((parcel) => {
       ))}
 
       <SectionTitle title="Véhicules" />
+      {vehicles.map((vehicle) => (
+  <Card
+    key={vehicle.id}
+    vehicle={vehicle}
+  />
+))}
     </ScrollView>
   );
 }
