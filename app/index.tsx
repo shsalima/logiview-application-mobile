@@ -7,19 +7,34 @@ import SearchBar from "../components/SearchBar";
 import SectionTitle from "../components/SectionTitle";
 
 import { parcels } from "../data/data";
+import FilterButtons from "@/components/FilterButtons";
 
 export default function Index() {
   const [search, setSearch] = useState("");
+  const [statusFilter, setStatusFilter] = useState("Tous");
 
-  const filteredParcels = parcels.filter((parcel) =>
-    parcel.reference.toLowerCase().includes(search.toLowerCase()),
-  );
+const filteredParcels = parcels.filter((parcel) => {
+  const matchSearch = parcel.reference
+    .toLowerCase()
+    .includes(search.toLowerCase());
+
+  const matchStatus =
+    statusFilter === "Tous" ||
+    parcel.status === statusFilter;
+
+  return matchSearch && matchStatus;
+});
 
   return (
     <ScrollView style={styles.container}>
       <Header />
 
       <SearchBar value={search} onChangeText={setSearch} />
+      <FilterButtons
+  selected={statusFilter}
+  onSelect={setStatusFilter}
+  parcels={parcels}
+/>
 
       <SectionTitle title="Colis" />
 
